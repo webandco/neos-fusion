@@ -1,0 +1,11 @@
+prototype(Webandco.Fusion:Component.Element.Message) < prototype(Webandco.Fusion:Component.Editable) {
+    tagName = 'p'
+
+    @styleguide {
+        title = 'Message'
+        props {
+            content = 'Some message...'
+            cssClass = 'message'
+        }
+    }
+}

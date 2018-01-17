@@ -1,0 +1,49 @@
+prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Component) {
+    cssClass = 'teaser'
+    cssModifier = Webandco.Fusion:ClassModifier
+
+    @styleguide {
+        title = 'Teaser'
+        props {
+            headline = 'Teaser headline'
+            subline = 'Teaser subline'
+            linkText = 'Teaser link text'
+            linkHref = '#'
+            linkTarget = false
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        // assign default class of component
+        attributes.class = ${props.cssClass}
+
+        // assign css modfieres
+        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
+            cssClass = ${props.cssClass}
+            cssModifier = ${props.cssModifier}
+        }
+
+        content = Neos.Fusion:Array {
+            image = Webandco.Fusion:Component.Tag.Img {
+                cssClass = 'teaser__image'
+            }
+
+            headline = Webandco.Fusion:Component.Element.Headline {
+                content = ${props.headline}
+                cssClass = 'teaser__headline'
+            }
+
+            subline = Webandco.Fusion:Component.Element.Subline {
+                content = ${props.subline}
+                cssClass = 'teaser__subline'
+            }
+
+            link = Webandco.Fusion:Component.Tag.A {
+                cssClass = 'teaser__link'
+                linkText   = ${props.linkText}
+                linkHref   = ${props.linkHref}
+                linkTarget = ${props.linkTarget}
+            }
+        }
+    }
+}

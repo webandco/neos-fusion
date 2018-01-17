@@ -1,0 +1,55 @@
+prototype(Webandco.Fusion:Component.Tag.Img) < prototype(Neos.Fusion:Component) {
+
+    cssClass = 'image'
+    cssModifier = Webandco.Fusion:ClassModifier
+
+    @styleguide {
+        title = 'Tag: img'
+        props {
+            imageAlt = 'image alt text'
+            imageTitle = 'image title text'
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = 'img'
+
+        // assign default class of component
+        attributes.class = ${props.cssClass}
+
+        // assign css modfieres
+        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
+            cssClass = ${props.cssClass}
+            cssModifier = ${props.cssModifier}
+        }
+
+        attributes.src = Neos.Fusion:Case {
+            asset {
+                condition = ${Type.isObject(props.imageSrc)}
+                renderer = Neos.Neos:ImageUri {
+                    allowCropping = true
+                    allowUpScaling = true
+                    asset = ${props.imageSrc}
+                    width = ${props.width}
+                    height = ${props.height}
+                }
+            }
+
+            resource {
+                condition = ${String.indexOf(props.imageSrc, 'resource') >= 0}
+                renderer = Neos.Fusion:ResourceUri {
+                    path = ${props.imageSrc}
+                }
+            }
+
+            fallback {
+                condition = ${true}
+                renderer = '/_Resources/Static/Packages/Neos.Neos/Images/dummy-image.svg'
+            }
+        }
+
+        attributes.alt = ${props.imageAlt}
+        attributes.title = ${props.imageTitle}
+    }
+}
+

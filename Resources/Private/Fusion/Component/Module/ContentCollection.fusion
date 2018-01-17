@@ -1,0 +1,3 @@
+prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Neos.Fusion:Component) {
+    renderer = Neos.Neos:ContentCollectionRenderer
+}

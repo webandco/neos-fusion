@@ -1,0 +1,39 @@
+prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
+
+    tagName = 'a'
+    cssClass = 'link'
+    cssModifier = Webandco.Fusion:ClassModifier
+    linkTarget = false
+
+    @styleguide {
+        title = 'Tag: link'
+        props {
+            linkText = 'link text'
+            linkHref = '#'
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = ${props.tagName}
+
+        // assign default class of component
+        attributes.class = ${props.cssClass}
+
+        // assign css modfieres
+        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
+            cssClass = ${props.cssClass}
+            cssModifier = ${props.cssModifier}
+        }
+
+        // assign href
+        attributes.href = ${props.linkHref}
+
+        // assign target if set
+        attributes.target = ${props.linkTarget}
+        attributes.target.@if.isset = ${props.linkTarget != false}
+
+        // assign content
+        content = ${props.linkText}
+    }
+}
+

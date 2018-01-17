@@ -1,0 +1,11 @@
+prototype(Webandco.Fusion:Component.Element.Subline) < prototype(Webandco.Fusion:Component.Editable) {
+    tagName = 'h2'
+
+    @styleguide {
+        title = 'Subline'
+        props {
+            content = 'Subline'
+            cssClass = 'subline'
+        }
+    }
+}

@@ -1,0 +1,15 @@
+// render BEM modifiers based on given css class name
+prototype(Webandco.Fusion:Component.ClassModifier) < prototype(Neos.Fusion:Component) {
+    cssClass = 'must-be-set'
+    cssModifier = Webandco.Fusion:ClassModifier
+    renderer = Neos.Fusion:Collection {
+        collection = ${props.cssModifier}
+        itemName = 'item'
+        itemRenderer = ${props.cssClass + '--' + item + ' '}
+
+        @process.defaultClass = ${String.trim(props.cssClass + ' ' + value)}
+    }
+}
+
+// array of modifiers
+prototype(Webandco.Fusion:ClassModifier) < prototype(Neos.Fusion:RawArray)

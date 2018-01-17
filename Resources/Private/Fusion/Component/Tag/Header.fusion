@@ -1,0 +1,43 @@
+prototype(Webandco.Fusion:Component.Tag.Header) < prototype(Neos.Fusion:Component) {
+
+    cssClass = 'header'
+    cssModifier = Webandco.Fusion:ClassModifier
+
+    headline = 'must-be-set'
+    subline = 'must-be-set'
+
+    @styleguide {
+        title = 'Tag: header'
+        props {
+            headline = 'Headline'
+            subline = 'Subline'
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = 'header'
+
+        // assign default class of component
+        attributes.class = ${props.cssClass}
+
+        // assign css modfieres
+        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
+            cssClass = ${props.cssClass}
+            cssModifier = ${props.cssModifier}
+        }
+
+        content = Neos.Fusion:Array {
+            headline = Webandco.Fusion:Component.Element.Headline {
+                content = ${props.headline}
+                cssClass = 'header__headline'
+                cssModifier = Webandco.Fusion:ClassModifier
+            }
+            subline = Webandco.Fusion:Component.Element.Subline {
+                content = ${props.subline}
+                cssClass = 'header__subline'
+                cssModifier = Webandco.Fusion:ClassModifier
+            }
+        }
+    }
+}
+

@@ -1,0 +1,11 @@
+prototype(Webandco.Fusion:Component.Element.Label) < prototype(Webandco.Fusion:Component.Editable) {
+    tagName = 'span'
+
+    @styleguide {
+        title = 'Label'
+        props {
+            content = 'label text...'
+            cssClass = 'label'
+        }
+    }
+}

@@ -43,6 +43,8 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
                 linkText   = ${props.linkText}
                 linkHref   = ${props.linkHref}
                 linkTarget = ${props.linkTarget}
+
+                @if.renderer = ${props.linkHref != false}
             }
         }
     }

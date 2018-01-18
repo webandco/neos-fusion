@@ -1,3 +1,36 @@
 prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Neos.Fusion:Component) {
-    renderer = Neos.Neos:ContentCollectionRenderer
+
+    tagName = 'div'
+    cssClass = 'module-content-collection'
+    cssModifier = Webandco.Fusion:ClassModifier
+    content = Webandco.Fusion:ContentCollection
+
+    @styleguide {
+        title = 'Content Collection'
+        props {
+            content = Webandco.Fusion:Content {
+                0 = 'Item 1'
+                1 = 'Item 1'
+                2 = 'Item 1'
+            }
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = ${props.tagName}
+
+        // assign default class of component
+        attributes.class = ${props.cssClass}
+
+        // assign css modfieres
+        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
+            cssClass = ${props.cssClass}
+            cssModifier = ${props.cssModifier}
+        }
+
+        content = ${props.content}
+    }
 }
+
+prototype(Webandco.Fusion:Content) < prototype(Neos.Fusion:Array)
+prototype(Webandco.Fusion:ContentCollection) < prototype(Neos.Neos:ContentCollectionRenderer)

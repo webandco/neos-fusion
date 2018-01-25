@@ -1,0 +1,53 @@
+prototype(Webandco.Fusion:Component.Tag.Picture) < prototype(Neos.Fusion:Component) {
+
+    cssClass = 'picture'
+    cssModifier = Webandco.Fusion:ClassModifier
+
+    source = Webandco.Fusion:Component.Tag.Picture.Source
+
+    imageSrc = 'must-be-set'
+    imageWidth = null
+    imageHeight = null
+    imageAlt = ''
+    imageTitle = ''
+
+    @styleguide {
+        title = 'Tag: picture'
+        props {
+            imageAlt = 'picture image alt text'
+            imageTitle = 'picture title text'
+            source = Webandco.Fusion:Component.Tag.Picture.Source {
+                0 = Webandco.Fusion:Component.Tag.Source
+            }
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = 'picture'
+
+        // assign default class of component
+        attributes.class = ${props.cssClass}
+        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
+
+        // assign css modfieres
+        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
+            cssClass = ${props.cssClass}
+            cssModifier = ${props.cssModifier}
+        }
+
+        content = Neos.Fusion:Array {
+            source = ${props.source}
+            image = Webandco.Fusion:Component.Tag.Img {
+                cssClass = 'picture__image'
+                imageSrc = 'must-be-set'
+                imageWidth = ${props.imageWidth}
+                imageHeight = ${props.imageWidth}
+                imageAlt = ${props.imageWidth}
+                imageTitle = ${props.imageWidth}
+            }
+        }
+    }
+}
+
+prototype(Webandco.Fusion:Component.Tag.Picture.Source) < prototype(Neos.Fusion:Array)
+

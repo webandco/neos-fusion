@@ -2,6 +2,17 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
     cssClass = 'teaser'
     cssModifier = Webandco.Fusion:ClassModifier
 
+    headline = 'must-be-set'
+    subline = 'must-be-set'
+
+    imageSrc = 'must-be-set'
+    imageAlt = 'must-be-set'
+    imageTitle = 'must-be-set'
+
+    linkText = 'must-be-set'
+    linkHref = '#'
+    linkTarget = false
+
     @styleguide {
         title = 'Teaser'
         props {
@@ -16,6 +27,7 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
     renderer = Neos.Fusion:Tag {
         // assign default class of component
         attributes.class = ${props.cssClass}
+        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
 
         // assign css modfieres
         attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
@@ -26,6 +38,10 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
         content = Neos.Fusion:Array {
             image = Webandco.Fusion:Component.Tag.Img {
                 cssClass = 'teaser__image'
+                imageSrc = ${props.imageSrc}
+                imageAlt = ${props.imageSrc}
+                imageTitle = ${props.imageSrc}
+                @if.showImage = ${props.imageSrc != false}
             }
 
             headline = Webandco.Fusion:Component.Element.Headline {
@@ -36,6 +52,7 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
             subline = Webandco.Fusion:Component.Element.Subline {
                 content = ${props.subline}
                 cssClass = 'teaser__subline'
+                @if.showSubline = ${props.subline != false}
             }
 
             link = Webandco.Fusion:Component.Tag.A {
@@ -44,7 +61,7 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
                 linkHref   = ${props.linkHref}
                 linkTarget = ${props.linkTarget}
 
-                @if.renderer = ${props.linkHref != false}
+                @if.showLink = ${props.linkHref != false}
             }
         }
     }

@@ -5,6 +5,10 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
     cssModifier = Webandco.Fusion:ClassModifier
     linkTarget = false
 
+    linkText = 'must-be-set'
+    linkHref = '#'
+    linkEnabled = true
+
     @styleguide {
         title = 'Tag: link'
         props {
@@ -18,6 +22,7 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
 
         // assign default class of component
         attributes.class = ${props.cssClass}
+        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
 
         // assign css modfieres
         attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
@@ -26,7 +31,10 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
         }
 
         // assign href
-        attributes.href = ${props.linkHref}
+        attributes.href = Webandco.Fusion:Component.Tag.A.Href {
+            linkHref = ${props.linkHref}
+            linkEnabled = ${props.linkEnabled}
+        }
 
         // assign target if set
         attributes.target = ${props.linkTarget}
@@ -34,6 +42,27 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
 
         // assign content
         content = ${props.linkText}
+    }
+}
+
+prototype(Webandco.Fusion:Component.Tag.A.Href) < prototype(Neos.Fusion:Component) {
+
+    linkHref = 'must-be-set'
+    linkEnabled = true
+
+    renderer = Neos.Fusion:Case {
+        enabled {
+            condition = ${Type.isObject(props.linkHref) && props.linkEnabled}
+            renderer = ${props.linkHref}
+            renderer.@process.convertUris = Neos.Neos:ConvertUris {
+                forceConversion = true
+            }
+        }
+
+        disabled {
+            condition = ${true}
+            renderer = '#'
+        }
     }
 }
 

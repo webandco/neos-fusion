@@ -19,6 +19,7 @@ prototype(Webandco.Fusion:Component.Tag.Header) < prototype(Neos.Fusion:Componen
 
         // assign default class of component
         attributes.class = ${props.cssClass}
+        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
 
         // assign css modfieres
         attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {

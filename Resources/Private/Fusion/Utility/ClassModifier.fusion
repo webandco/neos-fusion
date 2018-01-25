@@ -8,6 +8,7 @@ prototype(Webandco.Fusion:Component.ClassModifier) < prototype(Neos.Fusion:Compo
         itemRenderer = ${Array.first(String.pregSplit(props.cssClass, "/\s+/")) + '--' + item + ' '}
 
         @process.defaultClass = ${String.trim(props.cssClass + ' ' + value)}
+        @if.isset = ${!String.isBlank(props.cssClass)}
     }
 }
 

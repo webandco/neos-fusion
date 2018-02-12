@@ -10,6 +10,8 @@ prototype(Webandco.Fusion:Component.Tag.Picture) < prototype(Neos.Fusion:Compone
     imageHeight = null
     imageAlt = ''
     imageTitle = ''
+    imageCssClass = 'picture__image'
+    imageCssModifier = Webandco.Fusion:ClassModifier
 
     @styleguide {
         title = 'Tag: picture'
@@ -38,12 +40,13 @@ prototype(Webandco.Fusion:Component.Tag.Picture) < prototype(Neos.Fusion:Compone
         content = Neos.Fusion:Array {
             source = ${props.source}
             image = Webandco.Fusion:Component.Tag.Img {
-                cssClass = 'picture__image'
-                imageSrc = 'must-be-set'
+                cssClass = ${props.imageCssClass}
+                cssModifier = ${props.imageCssModifier}
+                imageSrc = ${props.imageSrc}
                 imageWidth = ${props.imageWidth}
-                imageHeight = ${props.imageWidth}
-                imageAlt = ${props.imageWidth}
-                imageTitle = ${props.imageWidth}
+                imageHeight = ${props.imageHeight}
+                imageAlt = ${props.imageAlt}
+                imageTitle = ${props.imageTitle}
             }
         }
     }

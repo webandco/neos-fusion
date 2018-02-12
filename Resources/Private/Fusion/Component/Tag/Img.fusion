@@ -66,6 +66,11 @@ prototype(Webandco.Fusion:Component.Tag.Img.Src) < prototype(Neos.Fusion:Compone
             }
         }
 
+        link {
+            condition = ${String.indexOf(props.imageSrc, 'http') >= 0}
+            renderer = ${props.imageSrc}
+        }
+
         fallback {
             condition = ${true}
             renderer = '/_Resources/Static/Packages/Neos.Neos/Images/dummy-image.svg'

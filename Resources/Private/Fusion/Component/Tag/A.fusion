@@ -1,6 +1,7 @@
-prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.A) < prototype(Webandco.Fusion:Component.Editable) {
 
     tagName = 'a'
+    property = 'linkText'
     cssClass = 'link'
     cssModifier = Webandco.Fusion:ClassModifier
     linkTarget = false
@@ -17,18 +18,8 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Neos.Fusion:Component) {
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer {
         tagName = ${props.tagName}
-
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
 
         // assign href
         attributes.href = Webandco.Fusion:Component.Tag.A.Href {
@@ -51,17 +42,50 @@ prototype(Webandco.Fusion:Component.Tag.A.Href) < prototype(Neos.Fusion:Componen
     linkEnabled = true
 
     renderer = Neos.Fusion:Case {
-        enabled {
+
+        inBackend {
+            condition = ${props.isEditable && node.context.inBackend}
+            renderer = ${'#inBackend'}
+        }
+
+        object {
             condition = ${Type.isObject(props.linkHref) && props.linkEnabled}
+            renderer = Neos.Neos:NodeUri {
+                node = ${props.linkHref}
+            }
+            renderer.@process.convertUris = Neos.Neos:ConvertUris {
+                forceConversion = true
+            }
+        }
+
+        node {
+            condition = ${Type.isString(props.linkHref) && String.indexOf(props.linkHref, 'node')  >= 0 && props.linkEnabled}
             renderer = ${props.linkHref}
             renderer.@process.convertUris = Neos.Neos:ConvertUris {
                 forceConversion = true
             }
         }
 
+        resource {
+            condition = ${String.indexOf(props.linkHref, 'resource') >= 0 && props.linkEnabled}
+            renderer = Neos.Fusion:ResourceUri {
+                path = ${props.linkHref}
+            }
+        }
+
+        link {
+            condition = ${String.indexOf(props.linkHref, 'http') >= 0}
+            renderer = ${props.linkHref}
+        }
+
         disabled {
+            condition = ${!props.linkEnabled}
+            renderer = ${'#disabled ' + props.linkHref}
+        }
+
+        default {
             condition = ${true}
-            renderer = '#'
+            renderer = ${props.linkHref}
         }
     }
 }

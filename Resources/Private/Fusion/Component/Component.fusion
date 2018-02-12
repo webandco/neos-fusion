@@ -1,0 +1,4 @@
+prototype(Webandco.Fusion:Component) < prototype(Neos.Fusion:Component) {
+    cssClass = 'component'
+    cssModifier = Webandco.Fusion:ClassModifier
+}

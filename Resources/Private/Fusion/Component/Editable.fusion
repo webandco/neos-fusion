@@ -3,28 +3,17 @@ prototype(Webandco.Fusion:Component.Editable) < prototype(Neos.Fusion:Component)
 
     content = 'must-be-set'
     tagName = 'div'
+    tagId = false
     property = 'must-be-set'
     cssClass = 'must-be-set'
     cssModifier = Webandco.Fusion:ClassModifier
     postfix = ''
+    isEditable = true
 
-    renderer = Neos.Fusion:Tag {
-        tagName = ${props.tagName}
-
-        // assign default class of component
-        attributes.class.@process.cssClass = ${String.trim(value + ' ' + props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
-
-        // assign component content
-        content = ${props.content}
-
+    renderer = Webandco.Fusion:Component.Tag {
         // assign editable feature
         @process.makeEditable = Neos.Neos:ContentElementEditable
+        @process.makeEditable.@if.editable = ${props.isEditable == true}
         @process.makeEditable.property = ${props.property + props.postfix}
     }
 }

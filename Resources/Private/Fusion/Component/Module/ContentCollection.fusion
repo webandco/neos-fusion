@@ -1,4 +1,4 @@
-prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Webandco.Fusion:Component) {
 
     tagName = 'div'
     cssClass = 'module-content-collection'
@@ -33,4 +33,5 @@ prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Neos.F
 }
 
 prototype(Webandco.Fusion:Content) < prototype(Neos.Fusion:Array)
+prototype(Webandco.Fusion:Collection) < prototype(Neos.Fusion:Collection)
 prototype(Webandco.Fusion:ContentCollection) < prototype(Neos.Neos:ContentCollectionRenderer)

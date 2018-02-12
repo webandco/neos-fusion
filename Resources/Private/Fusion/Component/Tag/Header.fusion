@@ -1,10 +1,13 @@
-prototype(Webandco.Fusion:Component.Tag.Header) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.Header) < prototype(Webandco.Fusion:Component) {
 
     cssClass = 'header'
     cssModifier = Webandco.Fusion:ClassModifier
 
     headline = 'must-be-set'
+    headlineCssClass = 'header__headline'
+
     subline = 'must-be-set'
+    sublineCssClass = 'header__subline'
 
     @styleguide {
         title = 'Tag: header'
@@ -14,31 +17,25 @@ prototype(Webandco.Fusion:Component.Tag.Header) < prototype(Neos.Fusion:Componen
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag {
         tagName = 'header'
 
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
-
-        content = Neos.Fusion:Array {
+        content = Webandco.Fusion:Component.Tag.Header.Content {
             headline = Webandco.Fusion:Component.Element.Headline {
                 content = ${props.headline}
-                cssClass = 'header__headline'
+                cssClass = ${props.headlineCssClass}
                 cssModifier = Webandco.Fusion:ClassModifier
             }
             subline = Webandco.Fusion:Component.Element.Subline {
                 content = ${props.subline}
-                cssClass = 'header__subline'
+                cssClass = ${props.sublineCssClass}
                 cssModifier = Webandco.Fusion:ClassModifier
+
+                @if.render = ${!Type.isBoolean(props.subline)}
             }
         }
     }
 }
+
+prototype(Webandco.Fusion:Component.Tag.Header.Content) < prototype(Neos.Fusion:Array)
 

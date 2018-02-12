@@ -1,7 +1,4 @@
 prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Component) {
-    cssClass = 'teaser'
-    cssModifier = Webandco.Fusion:ClassModifier
-
     headline = 'must-be-set'
     subline = 'must-be-set'
 
@@ -24,17 +21,7 @@ prototype(Webandco.Fusion:Component.Block.Teaser) < prototype(Neos.Fusion:Compon
         }
     }
 
-    renderer = Neos.Fusion:Tag {
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
-
+    renderer = Webandco.Fusion:Component.Tag {
         content = Neos.Fusion:Array {
             image = Webandco.Fusion:Component.Tag.Img {
                 cssClass = 'teaser__image'

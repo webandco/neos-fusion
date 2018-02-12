@@ -5,7 +5,9 @@ prototype(Webandco.Fusion:Component.ClassModifier) < prototype(Neos.Fusion:Compo
     renderer = Neos.Fusion:Collection {
         collection = ${props.cssModifier}
         itemName = 'item'
-        itemRenderer = ${Array.first(String.pregSplit(props.cssClass, "/\s+/")) + '--' + item + ' '}
+        itemRenderer = ${!String.isBlank(item) ? Array.first(String.pregSplit(props.cssClass, "/\s+/")) + '--' + item + ' ' : ''}
+
+        itemRenderer = ${(Type.isBoolean(item) && item == true) || !String.isBlank(item) ? Array.first(String.pregSplit(props.cssClass, "/\s+/")) + '--' + (Type.isBoolean(item) ? itemKey : item) + ' ' : ' '}
 
         @process.defaultClass = ${String.trim(props.cssClass + ' ' + value)}
         @if.isset = ${!String.isBlank(props.cssClass)}

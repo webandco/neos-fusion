@@ -1,49 +1,39 @@
-prototype(Webandco.Fusion:Component.Tag.Article) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.Article) < prototype(Webandco.Fusion:Component) {
 
     cssClass = 'article'
     cssModifier = Webandco.Fusion:ClassModifier
 
     headline = 'must-be-set'
-    sublibe = 'must-be-set'
+    lead = 'must-be-set'
     content = Webandco.Fusion:Component.Tag.Article.Content
 
 
     @styleguide {
         title = 'Tag: article'
         props {
-            headline = 'Article headline'
-            subline = 'Article Subline'
+            lead = 'Article lead text'
+            author = 'Article author'
             content = Webandco.Fusion:Component.Tag.Article.Content {
-                headline = Webandco.Fusion:Component.Element.Headline {
+                0 = Webandco.Fusion:Component.Element.Headline {
                     tagName = 'h2'
                 }
-                text = Webandco.Fusion:Component.Element.Text
+                1 = Webandco.Fusion:Component.Element.Text
             }
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag {
         tagName = 'article'
 
         // assign schema.org information
         attributes.itemtype = 'http://schema.org/Article'
         attributes.itemid = 'article'
 
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
-
         content = Webandco.Fusion:Component.Tag.Article.Body {
             picture = Webandco.Fusion:Component.Tag.Picture
             header = Webandco.Fusion:Component.Tag.Header {
                 headline = ${props.headline}
-                subline = ${props.subline}
+                subline = ${props.lead}
             }
             content = ${props.content}
         }

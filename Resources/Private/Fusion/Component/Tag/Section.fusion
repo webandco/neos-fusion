@@ -5,9 +5,9 @@ prototype(Webandco.Fusion:Component.Tag.Section) < prototype(Webandco.Fusion:Com
     content = Neos.Neos:ContentCollectionRenderer
 
     @styleguide {
-        title = 'Tag: section'
         props {
-            content = 'Some content...'
+            //no not set dummy content, it will break inherited implementations!
+            content = Webandco.Fusion:Content
         }
     }
 
@@ -20,42 +20,6 @@ prototype(Webandco.Fusion:Component.Tag.Section) < prototype(Webandco.Fusion:Com
     }
 }
 
-prototype(Webandco.Fusion.Bootstrap:Component.Tag.Section) < prototype(Neos.Fusion:Component) {
-
-    cssClass = 'section-content'
-    cssModifier = Webandco.Fusion:ClassModifier
-    contentTag = 'div'
-    contentClass = 'row'
-    content = Neos.Neos:ContentCollectionRenderer
-
-    @styleguide {
-        title = 'Tag: section (container)'
-        props {
-            content = 'Some content...'
-        }
-    }
-
-    renderer = Neos.Fusion:Tag {
-        tagName = 'section'
-
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
-
-        content = Neos.Fusion:Tag {
-            attributes.class = 'container'
-            content = Neos.Fusion:Tag {
-                tagName = ${props.contentTag}
-                attributes.class = ${props.contentClass}
-                content = ${props.content}
-            }
-        }
-    }
-}
+prototype(Webandco.Fusion:Component.Tag.Section.Body) < prototype(Neos.Fusion:Array)
+prototype(Webandco.Fusion:Component.Tag.Section.Tag) < prototype(Webandco.Fusion:Component.Tag)
 

@@ -1,0 +1,4 @@
+prototype(Webandco.Fusion:Content) < prototype(Neos.Fusion:Array)
+prototype(Webandco.Fusion:Tag.Content) < prototype(Neos.Fusion:Array)
+prototype(Webandco.Fusion:Collection) < prototype(Neos.Fusion:Collection)
+prototype(Webandco.Fusion:ContentCollection) < prototype(Neos.Neos:ContentCollectionRenderer)

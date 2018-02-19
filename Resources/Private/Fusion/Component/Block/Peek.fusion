@@ -1,0 +1,57 @@
+prototype(Webandco.Fusion:Component.Block.Peek) < prototype(Webandco.Fusion:Component) {
+
+    bemClass = 'peek'
+    bodyClass = ''
+    assetClass = ''
+
+    content = Webandco.Fusion:ContentCollection
+    link = Webandco.Fusion:ContentCollection
+
+    imageSrc = 'must-be-set'
+    imageAlt = 'must-be-set'
+    imageTitle = 'must-be-set'
+
+    @styleguide {
+        title = 'Teaser'
+        props {
+            bodyClass = ''
+            assetClass = ''
+            content = Webandco.Fusion:Content {
+                0 = 'Peek content...'
+            }
+            link = Webandco.Fusion:Content {
+                0 = Webandco.Fusion:Component.Tag.A {
+                    linkText = 'Peek link text'
+                    linkHref = '#'
+                    linkTarget = false
+                }
+            }
+        }
+    }
+
+    renderer = Webandco.Fusion:Component.Tag {
+        content = Webandco.Fusion:Component.Tag.Content {
+            asset = Webandco.Fusion:Component.Block.Peek.Asset {
+                attributes.class = ${String.trim(props.bemClass + '__asset ' + props.assetClass)}
+                content = Webandco.Fusion:Component.Tag.Img {
+                    imageSrc = ${props.imageSrc}
+                    imageAlt = ${props.imageSrc}
+                    imageTitle = ${props.imageSrc}
+                    @if.showImage = ${props.imageSrc != false}
+                }
+            }
+
+            body = Webandco.Fusion:Component.Block.Peek.Body {
+                attributes.class = ${String.trim(props.bemClass + '__body ' + props.assetClass)}
+                content = Neos.Fusion:Array {
+                    content = ${props.content}
+                    link = ${props.link}
+                }
+            }
+
+        }
+    }
+}
+
+prototype(Webandco.Fusion:Component.Block.Peek.Asset) < prototype(Neos.Fusion:Tag)
+prototype(Webandco.Fusion:Component.Block.Peek.Body) < prototype(Neos.Fusion:Tag)

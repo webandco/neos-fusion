@@ -1,7 +1,7 @@
 prototype(Webandco.Fusion:Component.Tag.Article) < prototype(Webandco.Fusion:Component) {
 
-    cssClass = 'article'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'article'
+    bemModifier = Webandco.Fusion:BemModifier
 
     headline = 'must-be-set'
     lead = 'must-be-set'

@@ -1,8 +1,8 @@
 prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Webandco.Fusion:Component) {
 
     tagName = 'div'
-    cssClass = 'module-content-collection'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'module-content-collection'
+    bemModifier = Webandco.Fusion:BemModifier
     content = Webandco.Fusion:ContentCollection
 
     @styleguide {
@@ -16,17 +16,8 @@ prototype(Webandco.Fusion:Component.Module.ContentCollection) < prototype(Weband
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag {
         tagName = ${props.tagName}
-
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
 
         content = ${props.content}
     }

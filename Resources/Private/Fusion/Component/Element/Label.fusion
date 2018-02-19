@@ -5,7 +5,7 @@ prototype(Webandco.Fusion:Component.Element.Label) < prototype(Webandco.Fusion:C
         title = 'Label'
         props {
             content = 'label text...'
-            cssClass = 'label'
+            bemClass = 'label'
         }
     }
 }

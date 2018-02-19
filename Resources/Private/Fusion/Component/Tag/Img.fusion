@@ -1,7 +1,7 @@
-prototype(Webandco.Fusion:Component.Tag.Img) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.Img) < prototype(Webandco.Fusion:Component) {
 
-    cssClass = 'image'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'image'
+    bemModifier = Webandco.Fusion:BemModifier
 
     imageSrc = 'must-be-set'
     imageWidth = null
@@ -17,18 +17,8 @@ prototype(Webandco.Fusion:Component.Tag.Img) < prototype(Neos.Fusion:Component) 
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag {
         tagName = 'img'
-
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
 
         attributes.src = Webandco.Fusion:Component.Tag.Img.Src {
             imageSrc = ${props.imageSrc}

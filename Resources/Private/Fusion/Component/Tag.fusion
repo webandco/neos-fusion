@@ -1,20 +1,22 @@
 prototype(Webandco.Fusion:Component.Tag) < prototype(Neos.Fusion:Tag) {
     tagName = ${props.tagName}
 
-    // assign default class of component
-    attributes.class.@process.cssClass = ${String.trim(value + ' ' + props.cssClass)}
-    attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
     // assign tag id
     attributes.id = ${props.tagId}
     attributes.id.@if.isset = ${props.tagId != false && !String.isBlank(String.trim(props.tagId))}
 
-    // assign css modfieres
-    attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-        cssClass = ${props.cssClass}
-        cssModifier = ${props.cssModifier}
+    // assign bem class and css modfieres
+    attributes.class = ${String.trim(props.bemClass)}
+    attributes.class.@process.cssModifier = Webandco.Fusion:Component.BemModifier {
+        bemClass = ${props.bemClass}
+        bemModifier = ${props.bemModifier}
     }
+
+    // assign additional css classes
+    attributes.class.@process.cssClass = ${String.isBlank(String.trim(props.cssClass)) ? value : String.trim(value + ' ' + props.cssClass)}
 
     // assign component content
     content = ${props.content}
 }
+
+prototype(Webandco.Fusion:Component.Tag.Content) < prototype(Neos.Fusion:Array)

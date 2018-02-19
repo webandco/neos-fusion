@@ -1,7 +1,10 @@
-prototype(Webandco.Fusion:Component.Tag.Source) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.Source) < prototype(Webandco.Fusion:Component) {
 
-    cssClass = ''
+    //has no bem functionality
+    bemClass = ''
+
     media = ''
+    cssClass = ''
     imageSrc = 'must-be-set'
     imageWidth = null
     imageHeight = null
@@ -13,16 +16,8 @@ prototype(Webandco.Fusion:Component.Tag.Source) < prototype(Neos.Fusion:Componen
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag {
         tagName = 'source'
-
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign media query
-        attributes.media = ${props.media}
-        attributes.media.@if.isset = ${!String.isBlank(props.media)}
 
         attributes.srcset = Webandco.Fusion:Component.Tag.Img.Src {
             imageSrc = ${props.imageSrc}

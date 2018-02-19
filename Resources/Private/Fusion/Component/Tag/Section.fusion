@@ -1,7 +1,7 @@
-prototype(Webandco.Fusion:Component.Tag.Section) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.Section) < prototype(Webandco.Fusion:Component) {
 
-    cssClass = 'section-content'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'section-content'
+    bemModifier = Webandco.Fusion:BemModifier
     content = Neos.Neos:ContentCollectionRenderer
 
     @styleguide {
@@ -11,20 +11,12 @@ prototype(Webandco.Fusion:Component.Tag.Section) < prototype(Neos.Fusion:Compone
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag.Section.Tag {
         tagName = 'section'
 
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
+        content = Webandco.Fusion:Component.Tag.Section.Body {
+            content = ${props.content}
         }
-
-        content = ${props.content}
     }
 }
 

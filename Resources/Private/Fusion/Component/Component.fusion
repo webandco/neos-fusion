@@ -1,4 +1,5 @@
 prototype(Webandco.Fusion:Component) < prototype(Neos.Fusion:Component) {
-    cssClass = 'component'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'bem-class-must-be-set'
+    cssClass = ''
+    bemModifier = Webandco.Fusion:BemModifier
 }

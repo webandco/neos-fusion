@@ -1,7 +1,7 @@
-prototype(Webandco.Fusion:Component.Tag.Picture) < prototype(Neos.Fusion:Component) {
+prototype(Webandco.Fusion:Component.Tag.Picture) < prototype(Webandco.Fusion:Component) {
 
-    cssClass = 'picture'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'picture'
+    bemModifier = Webandco.Fusion:BemModifier
 
     source = Webandco.Fusion:Component.Tag.Picture.Source
 
@@ -10,38 +10,29 @@ prototype(Webandco.Fusion:Component.Tag.Picture) < prototype(Neos.Fusion:Compone
     imageHeight = null
     imageAlt = ''
     imageTitle = ''
-    imageCssClass = 'picture__image'
-    imageCssModifier = Webandco.Fusion:ClassModifier
+
+    //todo ds: is this really the best way to do it?
+    imageBemModifier = Webandco.Fusion:BemModifier
 
     @styleguide {
-        title = 'Tag: picture'
         props {
             imageAlt = 'picture image alt text'
             imageTitle = 'picture title text'
+
             source = Webandco.Fusion:Component.Tag.Picture.Source {
                 0 = Webandco.Fusion:Component.Tag.Source
             }
         }
     }
 
-    renderer = Neos.Fusion:Tag {
+    renderer = Webandco.Fusion:Component.Tag {
         tagName = 'picture'
-
-        // assign default class of component
-        attributes.class = ${props.cssClass}
-        attributes.class.@if.isset = ${!String.isBlank(props.cssClass)}
-
-        // assign css modfieres
-        attributes.class.@process.cssModifier = Webandco.Fusion:Component.ClassModifier {
-            cssClass = ${props.cssClass}
-            cssModifier = ${props.cssModifier}
-        }
 
         content = Neos.Fusion:Array {
             source = ${props.source}
             image = Webandco.Fusion:Component.Tag.Img {
-                cssClass = ${props.imageCssClass}
-                cssModifier = ${props.imageCssModifier}
+                bemClass = ${props.bemClass + '__image'}
+                bemModifier = ${props.imageCssModifier}
                 imageSrc = ${props.imageSrc}
                 imageWidth = ${props.imageWidth}
                 imageHeight = ${props.imageHeight}

@@ -5,7 +5,7 @@ prototype(Webandco.Fusion:Component.Element.Subline) < prototype(Webandco.Fusion
         title = 'Subline'
         props {
             content = 'Subline'
-            cssClass = 'subline'
+            bemClass = 'subline'
         }
     }
 }

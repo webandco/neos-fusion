@@ -5,7 +5,7 @@ prototype(Webandco.Fusion:Component.Element.Message) < prototype(Webandco.Fusion
         title = 'Message'
         props {
             content = 'Some message...'
-            cssClass = 'message'
+            bemClass = 'message'
         }
     }
 }

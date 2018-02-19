@@ -2,8 +2,8 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Webandco.Fusion:Component
 
     tagName = 'a'
     property = 'linkText'
-    cssClass = 'link'
-    cssModifier = Webandco.Fusion:ClassModifier
+    bemClass = 'link'
+    bemModifier = Webandco.Fusion:BemModifier
     linkTarget = false
 
     linkText = 'must-be-set'

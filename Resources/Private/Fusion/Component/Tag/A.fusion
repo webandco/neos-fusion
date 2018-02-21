@@ -29,7 +29,7 @@ prototype(Webandco.Fusion:Component.Tag.A) < prototype(Webandco.Fusion:Component
 
         // assign target if set
         attributes.target = ${props.linkTarget}
-        attributes.target.@if.isset = ${props.linkTarget != false}
+        attributes.target.@if.isset = ${(Type.isObject(node) && node.context.inBackend) == false || props.linkTarget != false}
 
         // assign content
         content = ${props.linkText}
@@ -44,7 +44,7 @@ prototype(Webandco.Fusion:Component.Tag.A.Href) < prototype(Neos.Fusion:Componen
     renderer = Neos.Fusion:Case {
 
         inBackend {
-            condition = ${props.isEditable && node.context.inBackend}
+            condition = ${props.linkEnabled && Type.isObject(node) && node.context.inBackend}
             renderer = ${'#inBackend'}
         }
 

@@ -1,5 +1,6 @@
 prototype(Webandco.Fusion:Component.Element.Label) < prototype(Webandco.Fusion:Component.Editable) {
     tagName = 'span'
+    property = 'label'
 
     @styleguide {
         title = 'Label'

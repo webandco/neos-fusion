@@ -1,5 +1,6 @@
 prototype(Webandco.Fusion:Component.Element.Message) < prototype(Webandco.Fusion:Component.Editable) {
     tagName = 'p'
+    property = 'message'
 
     @styleguide {
         title = 'Message'

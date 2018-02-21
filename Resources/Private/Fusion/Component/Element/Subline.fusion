@@ -1,5 +1,6 @@
 prototype(Webandco.Fusion:Component.Element.Subline) < prototype(Webandco.Fusion:Component.Editable) {
     tagName = 'h2'
+    property = 'subline'
 
     @styleguide {
         title = 'Subline'

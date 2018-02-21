@@ -1,5 +1,6 @@
 prototype(Webandco.Fusion:Component.Element.Headline) < prototype(Webandco.Fusion:Component.Editable) {
     tagName = 'h1'
+    property = 'headline'
 
     @styleguide {
         title = 'Headline'

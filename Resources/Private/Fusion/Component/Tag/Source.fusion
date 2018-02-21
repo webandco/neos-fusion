@@ -18,7 +18,8 @@ prototype(Webandco.Fusion:Component.Tag.Source) < prototype(Webandco.Fusion:Comp
 
     renderer = Webandco.Fusion:Component.Tag {
         tagName = 'source'
-
+        attributes.media = ${props.media}
+        attributes.media.@if.isset = ${!String.isBlank(props.media)}
         attributes.srcset = Webandco.Fusion:Component.Tag.Img.Src {
             imageSrc = ${props.imageSrc}
             imageWidth = ${props.imageWidth}

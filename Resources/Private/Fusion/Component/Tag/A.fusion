@@ -52,9 +52,10 @@ prototype(Webandco.Fusion:Component.Tag.A.Href) < prototype(Neos.Fusion:Componen
             condition = ${Type.isObject(props.linkHref) && props.linkEnabled}
             renderer = Neos.Neos:NodeUri {
                 node = ${props.linkHref}
-            }
-            renderer.@process.convertUris = Neos.Neos:ConvertUris {
-                forceConversion = true
+
+                @process.convertUris = Neos.Neos:ConvertUris {
+                    forceConversion = true
+                }
             }
         }
 

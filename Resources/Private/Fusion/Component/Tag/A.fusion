@@ -60,7 +60,7 @@ prototype(Webandco.Fusion:Component.Tag.A.Href) < prototype(Neos.Fusion:Componen
         }
 
         node {
-            condition = ${Type.isString(props.linkHref) && String.indexOf(props.linkHref, 'node')  >= 0 && props.linkEnabled}
+            condition = ${Type.isString(props.linkHref) == false && String.indexOf(props.linkHref, 'node')  >= 0 && props.linkEnabled}
             renderer = ${props.linkHref}
             renderer.@process.convertUris = Neos.Neos:ConvertUris {
                 forceConversion = true
